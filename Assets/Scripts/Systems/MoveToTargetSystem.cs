@@ -29,14 +29,14 @@ public partial struct MoveToTargetSystem : ISystem
                 float3 targetPos = targetTransform.Position;
 
                 var dist = math.distance(targetPos, data.Item1.ValueRW.Position);
-                if (dist < data.Item2.ValueRO.moveSpeed)
-                    return;
+                if (dist >= data.Item2.ValueRO.moveSpeed)
+                {
+                    var diff = targetPos - data.Item1.ValueRW.Position;
+                    var dir = math.normalize(diff);
+                    dir *= data.Item2.ValueRO.moveSpeed * SystemAPI.Time.DeltaTime;
 
-                var diff = targetPos - data.Item1.ValueRW.Position;
-                var dir = math.normalize(diff);
-                dir *= data.Item2.ValueRO.moveSpeed * SystemAPI.Time.DeltaTime;
-
-                data.Item1.ValueRW.Position += dir;
+                    data.Item1.ValueRW.Position += dir;
+                }
             }
         }
     }

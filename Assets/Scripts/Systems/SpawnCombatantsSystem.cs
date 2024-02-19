@@ -2,6 +2,8 @@ using Unity.Entities;
 using Unity.Transforms;
 using Unity.Mathematics;
 using UnityEngine.UIElements;
+using System.Xml;
+using Unity.Rendering;
 
 public partial struct SpawnCombatantsSystem : ISystem
 {
@@ -33,6 +35,10 @@ public partial struct SpawnCombatantsSystem : ISystem
                     Scale = 1
                 }
             );
+            state.EntityManager.AddComponentData(newEntity, new URPMaterialPropertyBaseColor { Value = new float4(0, 0, 1, 1) });
+            /*RenderMesh renderMesh = state.EntityManager.GetComponentData<RenderMesh>(newEntity);
+            renderMesh.material.color = UnityEngine.Color.blue;
+            EntityManager.SetSharedComponentData(newEntity, renderMesh);*/
         }
        /* foreach (var entity in SystemAPI.Query<RefRW<LocalTransform>, RefRO<EntityMove>, RefRO<EntityMoveDestination>>())
         {

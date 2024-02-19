@@ -22,14 +22,14 @@ public partial struct MoveEntitySystem : ISystem
         foreach (var entity in SystemAPI.Query<RefRW<LocalTransform>, RefRO<EntityMove>, RefRO<EntityMoveDestination>>()) 
         {
             var dist = math.distance(entity.Item3.ValueRO.destination, entity.Item1.ValueRW.Position);
-            if (dist < entity.Item2.ValueRO.moveSpeed)
-                return;
+            if (dist >= entity.Item2.ValueRO.moveSpeed)
+            {
+                var diff = entity.Item3.ValueRO.destination - entity.Item1.ValueRW.Position;
+                var dir = math.normalize(diff);
+                dir *= entity.Item2.ValueRO.moveSpeed * SystemAPI.Time.DeltaTime;
 
-            var diff = entity.Item3.ValueRO.destination - entity.Item1.ValueRW.Position;
-            var dir = math.normalize(diff);
-            dir *= entity.Item2.ValueRO.moveSpeed * SystemAPI.Time.DeltaTime;
-
-            entity.Item1.ValueRW.Position += dir;
+                entity.Item1.ValueRW.Position += dir;
+            }
         }
     }
 }
