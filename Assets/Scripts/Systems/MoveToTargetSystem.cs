@@ -10,7 +10,7 @@ public partial struct MoveToTargetSystem : ISystem
 
     public void OnCreate(ref SystemState state)
     {
-        //throw new NotImplementedException();
+        state.RequireForUpdate<EntityMoveTarget>();
     }
 
     public void OnDestroy(ref SystemState state)

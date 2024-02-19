@@ -7,10 +7,9 @@ using UnityEngine;
 
 public partial struct MoveEntitySystem : ISystem
 {
-
     public void OnCreate(ref SystemState state)
     {
-        //throw new NotImplementedException();
+        state.RequireForUpdate<EntityMoveDestination>();
     }
 
     public void OnDestroy(ref SystemState state)
