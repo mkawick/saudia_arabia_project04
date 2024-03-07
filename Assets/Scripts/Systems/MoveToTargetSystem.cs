@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Entities;
@@ -7,7 +8,7 @@ using UnityEngine;
 
 public partial struct MoveToTargetSystem : ISystem
 {
-
+    //public Action<int, float3, int> OnUpdateUnit;
     public void OnCreate(ref SystemState state)
     {
         state.RequireForUpdate<EntityMoveTarget>();

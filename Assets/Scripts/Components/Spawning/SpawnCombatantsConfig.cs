@@ -9,5 +9,6 @@ public struct SpawnCombatantsConfig : IComponentData
     public Entity combatantPrefabEntity;
     //public Material[] combatantMaterials;
     public int numSpawnedCombatantsPerTeam;
+    public int defaultHealth;
 }
 

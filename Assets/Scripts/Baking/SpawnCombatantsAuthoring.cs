@@ -7,6 +7,7 @@ using UnityEngine;
 public class SpawnCombatantsAuthoring : MonoBehaviour
 {
     public GameObject combatantPrefabs;
+    public GameObject labelPrefab;
     public Material [] combatantMaterials;
     public int numSpawnedCombatantsPerTeam;
 
