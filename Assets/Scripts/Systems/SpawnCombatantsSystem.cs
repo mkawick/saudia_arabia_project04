@@ -5,6 +5,8 @@ using Unity.Rendering;
 using System;
 using UnityEngine;
 using Unity.Collections;
+using System.Linq;
+using Unity.Assertions;
 
 public partial class SpawnCombatantsSystem : SystemBase
 {
@@ -26,25 +28,60 @@ public partial class SpawnCombatantsSystem : SystemBase
 
         SpawnCombatantsConfig spawnConfig = SystemAPI.GetSingleton<SpawnCombatantsConfig>();
 
-        for(int i=0, id=100; i< spawnConfig.numSpawnedCombatantsPerTeam; i++, id+=1)
+        //QuickTest(ref spawnConfig);
+        int unitId = 100;
+        int numTeams = spawnConfig.numSpawnedCombatantsPerTeam.Length;
+        for (int team = 0; team < numTeams; team++)
         {
-            Entity newEntity = EntityManager.Instantiate(spawnConfig.combatantPrefabEntity);
-            var pos = new float3(UnityEngine.Random.Range(-40, 40),
-                    0,
-                    UnityEngine.Random.Range(-40, 40));
+            int numUnits = spawnConfig.numSpawnedCombatantsPerTeam[team];
+            for (int i = 0; i < numUnits; i++, unitId  += 1)
+            {
+                Entity newEntity = EntityManager.Instantiate(GetPrefab(team, ref spawnConfig));
+                var pos = new float3(UnityEngine.Random.Range(-40, 40),
+                        0,
+                        UnityEngine.Random.Range(-40, 40));
 
-            EntityManager.SetComponentData(newEntity, new LocalTransform{
+                EntityManager.SetComponentData(newEntity, new LocalTransform {
                     Position = pos,
                     Scale = 1
-                }
-            );
+                });
 
-            //int health = spawnConfig.defaultHealth;
-            EntityManager.AddComponentData(newEntity, new URPMaterialPropertyBaseColor { Value = new float4(0, 0, 1, 1) });
-            var healthComp = EntityManager.GetComponentData<HealthComponent>(newEntity);
-            //new HealthComponent { health = health, maxHealth = health });
-            EntityManager.AddComponentData(newEntity, new IdComponent { id = id });
-            OnCreateUnit?.Invoke(id, pos, healthComp.health);
+                //EntityManager.AddComponentData(newEntity, new URPMaterialPropertyBaseColor { Value = new float4(color.r, color.g, color.b, color.a) });
+                var healthComp = EntityManager.GetComponentData<HealthComponent>(newEntity);
+                EntityManager.AddComponentData(newEntity, new IdComponent { id = unitId });
+                OnCreateUnit?.Invoke(unitId, pos, healthComp.health);
+            }
         }
     }
+
+    Entity GetPrefab(int teamIndex, ref SpawnCombatantsConfig spawnConfig)
+    {
+        switch(teamIndex)
+        {
+            case 0: return spawnConfig.entityTeam1; break;
+            case 1: return spawnConfig.entityTeam2; break;
+            case 2: return spawnConfig.entityTeam3; break;
+            case 3: return spawnConfig.entityTeam4; break;
+        }
+        return Entity.Null;
+    }
+
+   /* void QuickTest(ref SpawnCombatantsConfig spawnConfig)
+    {
+        Entity newEntity = EntityManager.Instantiate(spawnConfig.testBlue);
+        var pos = new float3(UnityEngine.Random.Range(-40, 40),
+                0,
+                UnityEngine.Random.Range(-40, 40));
+
+        EntityManager.SetComponentData(newEntity, new LocalTransform
+        {
+            Position = pos,
+            Scale = 1
+        });
+        int unitId = 99;
+
+        var healthComp = EntityManager.GetComponentData<HealthComponent>(newEntity);
+        EntityManager.AddComponentData(newEntity, new IdComponent { id = unitId });
+        OnCreateUnit?.Invoke(unitId, pos, healthComp.health);
+    }*/
 }

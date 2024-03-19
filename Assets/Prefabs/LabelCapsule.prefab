@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6220187597818304627}
   - component: {fileID: 2742691480950046202}
   - component: {fileID: 2671542111219611472}
+  - component: {fileID: -1581883419224538282}
   m_Layer: 0
   m_Name: LabelCapsule
   m_TagString: Untagged
@@ -123,6 +124,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textOverHead: {fileID: 4660619512686258031}
   canvas: {fileID: 2895553674429211203}
+  health: 100
+--- !u!114 &-1581883419224538282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 931002285153276317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aef5d67239717fa4a85bc542bbe72ce0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  maxHealth: 100
 --- !u!1 &4762922625809691671
 GameObject:
   m_ObjectHideFlags: 0

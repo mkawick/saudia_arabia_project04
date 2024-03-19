@@ -1,15 +1,17 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
 using UnityEngine;
 
 public class SpawnCombatantsAuthoring : MonoBehaviour
 {
-    public GameObject combatantPrefabs;
-    public GameObject labelPrefab;
-    public Material [] combatantMaterials;
-    public int numSpawnedCombatantsPerTeam;
+    public GameObject[] combatantPrefabVariants;
+    //public GameObject labelPrefab;
+    public Color32[] combatantColors;
+    public short[] numSpawnedCombatantsPerTeam;
 
     private class Baker : Baker<SpawnCombatantsAuthoring>
     {
@@ -18,13 +20,37 @@ public class SpawnCombatantsAuthoring : MonoBehaviour
             var entity = GetEntity(TransformUsageFlags.None);
             if (entity != null)
             {
-                Entity spawnedEntity = GetEntity(authoring.combatantPrefabs, TransformUsageFlags.Dynamic);
+                FixedList64Bytes<Int16> combatantCount = new FixedList64Bytes<Int16>();
+                for(int count = 0; count< authoring.numSpawnedCombatantsPerTeam.Length; count++)
+                {
+                    combatantCount.Add(authoring.numSpawnedCombatantsPerTeam[count]);
+                }
+                FixedList128Bytes<Color32> combatantColor = new FixedList128Bytes<Color32>();
+                for (int count = 0; count < authoring.combatantColors.Length; count++)
+                {
+                    combatantColor.Add(authoring.combatantColors[count]);
+                }
+              /*  FixedList512Bytes<Entity> entityPrefabs = new FixedList512Bytes<Entity>();
+                for (int count = 0; count < authoring.combatantPrefabVariants.Length; count++)
+                {
+                    Entity spawnedEntity = GetEntity(authoring.combatantPrefabVariants[count], TransformUsageFlags.Dynamic);
+                    entityPrefabs.Add(spawnedEntity);
+                }*/
+                Entity entityTeam1 = GetEntity(authoring.combatantPrefabVariants[0], TransformUsageFlags.Dynamic);
+                Entity entityTeam2 = GetEntity(authoring.combatantPrefabVariants[1], TransformUsageFlags.Dynamic);
+                Entity entityTeam3 = GetEntity(authoring.combatantPrefabVariants[2], TransformUsageFlags.Dynamic);
+                Entity entityTeam4 = GetEntity(authoring.combatantPrefabVariants[3], TransformUsageFlags.Dynamic);
+
                 AddComponent(entity, new SpawnCombatantsConfig
                 {
-                    combatantPrefabEntity = spawnedEntity,
-                    numSpawnedCombatantsPerTeam = authoring.numSpawnedCombatantsPerTeam,
-                    //combatantMaterials = authoring.combatantMaterials
-                });
+                    entityTeam1 = entityTeam1,
+                    entityTeam2 = entityTeam2,
+                    entityTeam3 = entityTeam3,
+                    entityTeam4 = entityTeam4,
+                    numSpawnedCombatantsPerTeam = combatantCount, 
+                    combatantColors = combatantColor,
+                    defaultHealth = 100,
+                }); 
             }
         }
     }

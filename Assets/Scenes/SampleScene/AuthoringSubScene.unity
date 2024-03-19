@@ -152,12 +152,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 298741d5cbe80c945969b82dceaa3b68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  combatantPrefabs: {fileID: 980958567}
-  labelPrefab: {fileID: 836993841}
-  combatantMaterials:
-  - {fileID: 2100000, guid: 8008d7ea84b930d49b9b3bf086d400a9, type: 2}
-  - {fileID: 2100000, guid: 56fa1ca34d6f72840bf89c4db0daea53, type: 2}
-  numSpawnedCombatantsPerTeam: 4
+  combatantPrefabVariants:
+  - {fileID: 7627864570980395437, guid: 16c6ead579496e24b8e3d6cda810984a, type: 3}
+  - {fileID: 7627864570980395437, guid: 26af304a649ee2f4e8f843528b198acc, type: 3}
+  - {fileID: 7627864570980395437, guid: f48f263f2daf2a148908b005a2e53b00, type: 3}
+  - {fileID: 7627864570980395437, guid: 34c6e470467e51043bfbdb4fea0a4949, type: 3}
+  combatantColors:
+  - serializedVersion: 2
+    rgba: 0
+  - serializedVersion: 2
+    rgba: 7171518
+  - serializedVersion: 2
+    rgba: 0
+  - serializedVersion: 2
+    rgba: 0
+  numSpawnedCombatantsPerTeam: 0200050004000100
 --- !u!4 &30025115
 Transform:
   m_ObjectHideFlags: 0
@@ -377,12 +386,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &836993841 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 931002285153276317, guid: 39045a668a985e647b5b18c675288b84,
-    type: 3}
-  m_PrefabInstance: {fileID: 5703476885407891850}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &936897026
 GameObject:
   m_ObjectHideFlags: 0
@@ -635,8 +638,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 12
   maxHealth: 100
-  healthPrefab: {fileID: 931002285153276317, guid: 39045a668a985e647b5b18c675288b84,
-    type: 3}
 --- !u!1 &1202529394
 GameObject:
   m_ObjectHideFlags: 0
@@ -649,6 +650,7 @@ GameObject:
   - component: {fileID: 1202529397}
   - component: {fileID: 1202529396}
   - component: {fileID: 1202529395}
+  - component: {fileID: 1202529399}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
@@ -745,6 +747,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1202529399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1202529394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54b6467bcd530cd4d809fae70ea0ca9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: {r: 0.5145711, g: 0.8867924, b: 0.4908033, a: 0}
 --- !u!1 &2035252033
 GameObject:
   m_ObjectHideFlags: 0

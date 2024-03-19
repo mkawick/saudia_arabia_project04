@@ -7,14 +7,14 @@ using UnityEngine.Windows.Speech;
 
 public class WorldSpaceHealthDisplaySystem : MonoBehaviour
 {
-    public GameObject healthDisplyUnit;
+    public GameObject healthDisplayUnit;
     private GameObject unitCreated;
     Dictionary<int, LabeledCapsule> capsules;
     // Start is called before the first frame update
     void Start()
     {
         capsules = new Dictionary<int, LabeledCapsule>();
-        unitCreated = Instantiate(healthDisplyUnit, Vector3.zero, Quaternion.identity);
+        unitCreated = Instantiate(healthDisplayUnit, Vector3.zero, Quaternion.identity);
         //unitCreated.GetComponent<LabeledCapsule>().c
     }
 
@@ -48,7 +48,7 @@ public class WorldSpaceHealthDisplaySystem : MonoBehaviour
         if (capsules.ContainsKey(unitId))
             return;
 
-        GameObject go = Instantiate(healthDisplyUnit, Vector3.zero, Quaternion.identity);
+        GameObject go = Instantiate(healthDisplayUnit, Vector3.zero, Quaternion.identity);
         go.transform.position = startPosition;
         var capsule = go.GetComponent<LabeledCapsule>();
         capsule.health = health;
