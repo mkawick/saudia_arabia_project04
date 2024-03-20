@@ -386,6 +386,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &899897702 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 931002285153276317, guid: 39045a668a985e647b5b18c675288b84,
+    type: 3}
+  m_PrefabInstance: {fileID: 5703476885407891850}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &899897710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 899897702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec541b45b821604468ddda9f8e3a3704, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destination: {fileID: 612859778}
 --- !u!1 &936897026
 GameObject:
   m_ObjectHideFlags: 0
@@ -501,9 +520,9 @@ GameObject:
   - component: {fileID: 980958570}
   - component: {fileID: 980958569}
   - component: {fileID: 980958568}
+  - component: {fileID: 980958574}
   - component: {fileID: 980958572}
   - component: {fileID: 980958573}
-  - component: {fileID: 980958574}
   m_Layer: 0
   m_Name: Follower
   m_TagString: Untagged
@@ -905,6 +924,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -2002062504797609530, guid: 39045a668a985e647b5b18c675288b84,
+        type: 3}
+      propertyPath: moveSpeedMultiplier
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 931002285153276317, guid: 39045a668a985e647b5b18c675288b84,
         type: 3}
       propertyPath: m_Name
@@ -965,13 +989,28 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2671542111219611472, guid: 39045a668a985e647b5b18c675288b84,
+        type: 3}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2671542111219611472, guid: 39045a668a985e647b5b18c675288b84,
+        type: 3}
+      propertyPath: textOverHead
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2895553674429211203, guid: 39045a668a985e647b5b18c675288b84,
         type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 7693598508647226089, guid: 39045a668a985e647b5b18c675288b84, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 931002285153276317, guid: 39045a668a985e647b5b18c675288b84,
+        type: 3}
+      insertIndex: 7
+      addedObject: {fileID: 899897710}
   m_SourcePrefab: {fileID: 100100000, guid: 39045a668a985e647b5b18c675288b84, type: 3}
