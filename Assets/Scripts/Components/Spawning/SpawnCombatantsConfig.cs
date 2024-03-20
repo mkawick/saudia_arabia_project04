@@ -9,6 +9,7 @@ using UnityEngine;
 public struct SpawnCombatantsConfig : IComponentData
 {
     public Entity entityTeam1, entityTeam2, entityTeam3, entityTeam4;
+    public Entity testTargetToFollow;
     public FixedList128Bytes<Color32> combatantColors;
     public FixedList64Bytes<Int16> numSpawnedCombatantsPerTeam;
     public int defaultHealth;

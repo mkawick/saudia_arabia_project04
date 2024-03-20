@@ -28,6 +28,7 @@ public partial class SpawnCombatantsSystem : SystemBase
 
         SpawnCombatantsConfig spawnConfig = SystemAPI.GetSingleton<SpawnCombatantsConfig>();
 
+        Entity targetEntity = spawnConfig.testTargetToFollow;
         //QuickTest(ref spawnConfig);
         int unitId = 100;
         int numTeams = spawnConfig.numSpawnedCombatantsPerTeam.Length;
@@ -50,6 +51,11 @@ public partial class SpawnCombatantsSystem : SystemBase
                 var healthComp = EntityManager.GetComponentData<HealthComponent>(newEntity);
                 EntityManager.AddComponentData(newEntity, new IdComponent { id = unitId });
                 OnCreateUnit?.Invoke(unitId, pos, healthComp.health);
+
+                EntityManager.SetComponentData(newEntity, new EntityMoveTarget
+                {
+                    target = targetEntity,
+                });
             }
         }
     }
