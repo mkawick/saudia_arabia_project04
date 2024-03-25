@@ -28,16 +28,16 @@ public partial class SpawnCombatantsSystem : SystemBase
 
         SpawnCombatantsConfig spawnConfig = SystemAPI.GetSingleton<SpawnCombatantsConfig>();
 
-        Entity targetEntity = spawnConfig.testTargetToFollow;
+        //Entity targetEntity = spawnConfig.testTargetToFollow;
         //QuickTest(ref spawnConfig);
         int unitId = 100;
         int numTeams = spawnConfig.numSpawnedCombatantsPerTeam.Length;
-        for (int team = 0; team < numTeams; team++)
+        for (int teamId = 0; teamId < numTeams; teamId++)
         {
-            int numUnits = spawnConfig.numSpawnedCombatantsPerTeam[team];
+            int numUnits = spawnConfig.numSpawnedCombatantsPerTeam[teamId];
             for (int i = 0; i < numUnits; i++, unitId  += 1)
             {
-                Entity newEntity = EntityManager.Instantiate(GetPrefab(team, ref spawnConfig));
+                Entity newEntity = EntityManager.Instantiate(GetPrefab(teamId, ref spawnConfig));
                 var pos = new float3(UnityEngine.Random.Range(-40, 40),
                         0,
                         UnityEngine.Random.Range(-40, 40));
@@ -52,10 +52,13 @@ public partial class SpawnCombatantsSystem : SystemBase
                 EntityManager.AddComponentData(newEntity, new IdComponent { id = unitId });
                 OnCreateUnit?.Invoke(unitId, pos, healthComp.health);
 
-                EntityManager.SetComponentData(newEntity, new EntityMoveTarget
+                EntityManager.AddComponentData(newEntity, new TeamUnitComponent { teamId = teamId });
+
+                
+               /* EntityManager.SetComponentData(newEntity, new EntityMoveTarget
                 {
                     target = targetEntity,
-                });
+                });*/
             }
         }
     }
